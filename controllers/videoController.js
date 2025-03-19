@@ -44,10 +44,7 @@ class VideoController {
                 return res.status(404).json({ message: 'Video not found' });
             }
 
-            // Получаем количество лайков
-            const likesCount = await Like.count({ where: { videoId: id } });
-
-            return res.json({ ...video.toJSON(), likesCount });
+            return res.json(video);
         } catch (error) {
             next(ApiError.badRequest(error.message));
         }
