@@ -1,4 +1,4 @@
-const { Video, Category } = require('../models/models');
+const { Video, Category, Like } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class VideoController {
