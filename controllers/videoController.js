@@ -39,14 +39,14 @@ class VideoController {
             const video = await Video.findByPk(id, {
                 include: [{ model: Category, attributes: ['name'] }],
             });
-    
+
             if (!video) {
                 return res.status(404).json({ message: 'Video not found' });
             }
-    
+
             // Получаем количество лайков
             const likesCount = await Like.count({ where: { videoId: id } });
-    
+
             return res.json({ ...video.toJSON(), likesCount });
         } catch (error) {
             next(ApiError.badRequest(error.message));
