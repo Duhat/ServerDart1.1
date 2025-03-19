@@ -33,22 +33,23 @@ class VideoController {
     }
 
     // Получение видео по ID
-    async getById(req, res, next) {
-        try {
-            const { id } = req.params;
-            const video = await Video.findByPk(id, {
-                include: [{ model: Category, attributes: ['name'] }],
-            });
+async getById(req, res, next) {
+    try {
+        const { id } = req.params;
+        const video = await Video.findByPk(id, {
+            include: [{ model: Category, attributes: ['name'] }],
+        });
 
-            if (!video) {
-                return res.status(404).json({ message: 'Video not found' });
-            }
-
-            return res.json(video);
-        } catch (error) {
-            next(ApiError.badRequest(error.message));
+        if (!video) {
+            return res.status(404).json({ message: 'Video not found' });
         }
+
+        return res.json(video);
+    } catch (error) {
+        next(ApiError.badRequest(error.message));
     }
+}
+
 
     // Обновление видео
     async update(req, res, next) {
